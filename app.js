@@ -33,10 +33,24 @@ app.get("/pokemon", async (req,res)=>{
     
 })
 
-app.get("/pokemon/:name", async (req,res)=>{
-    P.getPokemonByName(req.params.name)
-    .then(response => res.json(response))
-    .catch(err => res.send(err))
+app.get("/pokemon/:id", async (req,res)=>{
+    try{
+        const pokemon =  await getPokemonById(req.params.id)
+        let formatJson = {
+            status: "true",
+            result: {
+                id_pokemon: pokemon.data.id,
+                nom: pokemon.data.name,            
+                nom_type_1: pokemon.data.types[0].type.name,
+                nom_type_2: pokemon.data.types[1].type.name,
+                url_image: pokemon.data.sprites.front_default
+            }
+        }
+        res.json(formatJson)
+    }catch(error){
+        res.send(error)
+    }
+    
 })
 
 
@@ -44,6 +58,15 @@ const getAllPokemon = async () => {
     
     try {
         return await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
+      } catch (error) {
+        console.error(error)
+      }
+}
+
+const getPokemonById = async (id) => {
+    
+    try {
+        return await axios.get('https://pokeapi.co/api/v2/pokemon/'+id)
       } catch (error) {
         console.error(error)
       }
