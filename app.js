@@ -18,19 +18,15 @@ app.get("/pokemon", async (req,res)=>{
 
 
 const getAllPokemon = async () => {
-    let arrayAllPokemon = Array()
-    for(let i=1;i<151;i++){
-        try {
-            arrayAllPokemon.push(await axios.get("http://www.ray0.be/pokeapi/pokemon-row/fr/"+i).data)
-            console.log(arrayAllPokemon)
-          } catch (error) {
-            console.error(error)
-          }
-        }
-    }
     
+    try {
+        return await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
+      } catch (error) {
+        console.error(error)
+      }
+}
 
-
+    
 
 app.listen(3003,()=> {
     console.log("Server is running on 3003")
