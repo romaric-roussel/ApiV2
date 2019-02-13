@@ -14,4 +14,4 @@ const pool = mysql.createPool({
   }
 
   
-module.exports = getConnection
+module.exports.getConnection = getConnection

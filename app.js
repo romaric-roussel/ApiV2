@@ -4,6 +4,7 @@ const axios = require('axios')
 const bodyParser= require('body-parser')
 const app = express()
 const Pokedex = require('pokedex-promise-v2');
+const route = require('./routes')
 
 let P = new Pokedex();
 
@@ -29,11 +30,8 @@ let P = new Pokedex();
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(morgan('combined'))
+app.use(route.router)
 
-
-const pokemonRoute = require("./routes/pokemon.js")
-
-app.use(pokemonRoute)
 
     
 
