@@ -1,10 +1,10 @@
 const axios = require('axios')
 const express = require('express')
-const pokemonRouter = express.Router()
+const pokemonRouterGet = express.Router()
 
 
 
-pokemonRouter.get("/pokemon", async (req,res)=>{
+pokemonRouterGet.get("/pokemon", async (req,res)=>{
     let formatJson
       try {
           const allPokemon =  await getAllPokemon()
@@ -25,7 +25,7 @@ pokemonRouter.get("/pokemon", async (req,res)=>{
     
 })
 
-pokemonRouter.get("/pokemon/:id", async (req,res)=>{
+pokemonRouterGet.get("/pokemon/:id", async (req,res)=>{
     try{
         const pokemon =  await getPokemonById(req.params.id)
         let formatJson = {
@@ -74,4 +74,4 @@ const getIdPokemonAndImageFromName = async (name) => {
 }
 
 
-module.exports.pokemonRouter = pokemonRouter
+module.exports.pokemonRouterGet = pokemonRouterGet

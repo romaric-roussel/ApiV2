@@ -1,8 +1,12 @@
 
-const pokemon = require('./router/pokemon/getPokemon')
-const user = require('./router/users/getUsers')
+const pokemonGet = require('./router/pokemon/getPokemon')
+const userGet = require('./router/users/getUsers')
+const userPost = require('./router/users/postUsers')
 
-const router = [pokemon.pokemonRouter,user.userRouter]
+
+const router = [pokemonGet.pokemonRouterGet
+               ,userGet.userRouterGet,
+                userPost.userRouterPost]
 
 
 module.exports.router = router

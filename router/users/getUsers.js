@@ -1,9 +1,9 @@
 const express = require('express')
-const userRouter = express.Router()
+const userRouterGet = express.Router()
 const connection = require("../../connection")
 
 
-userRouter.get("/user", (req,res)=>{
+userRouterGet.get("/user", (req,res)=>{
     const query = "select * from utilisateur"
     connection.getConnection().query(query,(err,rows,fiels)=>{
         if(err){
@@ -17,7 +17,7 @@ userRouter.get("/user", (req,res)=>{
 })
 
 
-module.exports.userRouter = userRouter
+module.exports.userRouterGet = userRouterGet
 
 
 
