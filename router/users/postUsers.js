@@ -2,8 +2,11 @@ const express = require('express')
 const userRouterPost = express.Router()
 const connection = require("../../connection")
 const bcrypt = require('bcrypt')
-//const util = require('util')
-const JSON = require('circular-json');
+const mail = require('../../mail')
+//const JSON = require('circular-json')
+
+
+
 
 
 
@@ -38,6 +41,17 @@ userRouterPost.post("/user/login", (req,res)=>{
     const password = req.body.password;
     
     loginTest(login,password,res)
+    
+   
+  
+})
+
+userRouterPost.post("/user/forgetPassword", (req,res)=>{
+    const login = req.body.login;
+    mail.mailOptions.to = login
+    mail.sendMail(res)
+    //console.log("log "+ mail.mailOptions.to)
+    
     
    
   
