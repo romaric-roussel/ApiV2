@@ -10,4 +10,3 @@ const router = [pokemonGet.pokemonRouterGet
 
 
 module.exports.router = router
-console.log(router)

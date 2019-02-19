@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
   from: 'lpiemetu@outlook.fr',
   to: "",
   subject: 'Password forgot',
-  text: 'Here your password : '
+  text: ''
 };
 
 const sendMail = (res) => transporter.sendMail(mailOptions, function(error, info){

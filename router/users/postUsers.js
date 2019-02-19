@@ -3,6 +3,7 @@ const userRouterPost = express.Router()
 const connection = require("../../connection")
 const bcrypt = require('bcrypt')
 const mail = require('../../mail')
+const generator = require('generate-password');
 //const JSON = require('circular-json')
 
 
@@ -48,13 +49,22 @@ userRouterPost.post("/user/login", (req,res)=>{
 
 userRouterPost.post("/user/forgetPassword", (req,res)=>{
     const login = req.body.login;
+    const password = generator.generate({
+        length: 10,
+        numbers: true
+    });
+    const query = "update utilisateur set mdp =? where id_utilisateur = (select id_utilisateur from (select * from utilisateur ) as UT where mail = ? and type_connexion = 3)"
     mail.mailOptions.to = login
+    mail.mailOptions.text = "here your new password : " + password
+    connection.getConnection().query(query,[bcrypt.hashSync(password,10),login],(err,rows,field)=>{
+        if(err){           
+            res.status(500).send(err.message)
+            return
+        }else {
+            res.status(200).send("User updated")
+        }  
+    })
     mail.sendMail(res)
-    //console.log("log "+ mail.mailOptions.to)
-    
-    
-   
-  
 })
 
 const loginTest = (login,password,response) =>{
