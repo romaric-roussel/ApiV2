@@ -70,17 +70,29 @@ userRouterPost.post("/user/forgetPassword", (req,res)=>{
 const loginTest = (login,password,response) =>{
   
     const queryGetMdp = "select mdp from utilisateur where mail = ? "
-    connection.getConnection().query(queryGetMdp,[login],(err,rows,fields)=>{
-            if(err){
-                response.status(500).send(err.message)
+    const queryGetUserId = "select id_utilisateur from utilisateur where mail = ? and mdp = ? "
+
+    connection.getConnection().query(queryGetMdp,[login],(errMdp,rowsMdp,fieldsMdp)=>{
+            if(errMdp){
+                response.status(500).send(errMdp.message)
                 return
                
             }else {
-                bcrypt.compare( password,rows[0].mdp, function(err, res) {
+                if(rowsMdp.length < 1){
+                    response.status(500).send("Mail adress unknow")
+                    return
+                }
+                console.log("pppp")
+                bcrypt.compare( password,rowsMdp[0].mdp, function(err, res) {
                     if(res) {
                      // Passwords match
-                     response.status(200).send("loggin success")
-                     
+                     connection.getConnection().query(queryGetUserId,[login,rowsMdp[0].mdp],(errId,rowsId,fieldsId)=>{
+                         if(errId){
+                             response.status(500).send(errId.message)
+                         }else{
+                            response.status(200).send({id:rowsId[0].id_utilisateur})
+                         }
+                     })
                     } else {
                      // Passwords don't match
                      response.status(500).send("loggin failed")
