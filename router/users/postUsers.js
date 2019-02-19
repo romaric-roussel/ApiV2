@@ -82,7 +82,6 @@ const loginTest = (login,password,response) =>{
                     response.status(500).send("Mail adress unknow")
                     return
                 }
-                console.log("pppp")
                 bcrypt.compare( password,rowsMdp[0].mdp, function(err, res) {
                     if(res) {
                      // Passwords match
