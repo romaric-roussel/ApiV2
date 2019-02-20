@@ -49,7 +49,7 @@ pokemonRouterGet.get("/pokemon/:id", async (req,res)=>{
 const getAllPokemon = async () => {
     
     try {
-        return await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
+        return await axios.get('https://pokeapi.co/api/v2/pokemon?limit=150')
       } catch (error) {
         console.error(error)
       }
