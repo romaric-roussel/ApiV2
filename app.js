@@ -35,6 +35,7 @@ app.use(route.router)
 
     
 
-app.listen(3003,()=> {
-    console.log("Server is running on 3003")
-})
+//localhost:4000
+app.listen(process.env.PORT || 4000, function(){
+  console.log('Your node js server is running');
+});
