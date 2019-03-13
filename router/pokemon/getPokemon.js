@@ -28,13 +28,17 @@ pokemonRouterGet.get("/pokemon", async (req,res)=>{
 pokemonRouterGet.get("/pokemon/:id", async (req,res)=>{
     try{
         const pokemon =  await getPokemonById(req.params.id)
+        let nom_type_2 = ""
+        if(pokemon.data.types[1] != null){
+            nom_type_2 = pokemon.data.types[1].type.name
+        }
         let formatJson = {
             status: "true",
             result: {
                 id_pokemon: pokemon.data.id,
                 nom: pokemon.data.name,            
                 nom_type_1: pokemon.data.types[0].type.name,
-                nom_type_2: pokemon.data.types[1].type.name,
+                nom_type_2: nom_type_2,
                 url_image: pokemon.data.sprites.front_default
             }
         }
