@@ -1,7 +1,15 @@
 const mysql = require('mysql')
 
 
-const pool = mysql.createPool({
+/*const pool = mysql.createPool({
+    connectionLimit:10,
+    host: 'localhost',
+    user: 'root',
+    password:"",
+    database: 'api'
+  })*/
+
+  const pool = mysql.createPool({
     connectionLimit:10,
     host: 'db4free.net',
     user: 'romaric',
