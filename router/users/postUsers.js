@@ -70,7 +70,7 @@ userRouterPost.post("/user/forgetPassword", (req,res)=>{
 const loginTest = (login,password,response) =>{
   
     const queryGetMdp = "select mdp from utilisateur where mail = ? "
-    const queryGetUserId = "select id_utilisateur from utilisateur where mail = ? and mdp = ? "
+    const queryGetUserId = "select * from utilisateur where mail = ? and mdp = ? "
 
     connection.getConnection().query(queryGetMdp,[login],(errMdp,rowsMdp,fieldsMdp)=>{
             if(errMdp){
@@ -89,7 +89,7 @@ const loginTest = (login,password,response) =>{
                          if(errId){
                              response.status(500).send(errId.message)
                          }else{
-                            response.status(200).send({id:rowsId[0].id_utilisateur})
+                            response.status(200).send({id:rowsId[0].id_utilisateur,nom:rowsId[0].nom,prenom:rowsId[0].prenom,mail:rowsId[0].mail,photo:rowsId[0].photo})
                          }
                      })
                     } else {
