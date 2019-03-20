@@ -23,14 +23,14 @@ userRouterPost.post("/user", (req,res)=>{
     connection.getConnection().query(query,[nom,prenom,mail,hashPassword,type_connexion,photo],(err,rows,field)=>{
         if(err){
             if(err.code =="ER_DUP_ENTRY"){
-                 res.status(202).send("Mail adress already used")
+                 res.status(202).send({status:"Mail adress already used"})
                  return
             }else{
                 res.sendStatus(500)
                 return
             } 
         }else {
-            res.status(201).send("Account created")
+            res.status(201).send({status:"Account created"})
         }
         
     })

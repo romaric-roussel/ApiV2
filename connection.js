@@ -9,6 +9,7 @@ const mysql = require('mysql')
     database: 'api'
   })*/
 
+
   const pool = mysql.createPool({
     connectionLimit:10,
     host: 'db4free.net',
@@ -17,6 +18,7 @@ const mysql = require('mysql')
     port:'3306',
     database: 'apipokemons'
   })
+
 
  const getConnection  = () => {
     return pool
