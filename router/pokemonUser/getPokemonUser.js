@@ -12,7 +12,7 @@ const pokemonUserRouterGet = express.Router()
                  res.sendStatus(500)
                  return
              }else {
-                formatJson = {status:"true",result:[]}
+                formatJson = {status:"true",result:{data:[]}}
                 for(let i = 0;i<rows.length;i++){
                     const onePokemon = await getPokemonById(rows[i].id_pokemon)
                     let result = {id:"",image:"",name:"",nb_exemplaire:""}
@@ -20,7 +20,7 @@ const pokemonUserRouterGet = express.Router()
                     result.image = onePokemon.data.sprites.front_default
                     result.name = onePokemon.data.name
                     result.nb_exemplaire = rows[i].nb_exemplaire
-                    formatJson.result[i] = result
+                    formatJson.result.data[i] = result
                 }
                 res.json(formatJson)
                 //res.json(rows)
