@@ -7,7 +7,7 @@ userRouterGet.get("/user", (req,res)=>{
     const query = "select * from utilisateur"
     connection.getConnection().query(query,(err,rows,fiels)=>{
         if(err){
-            res.sendStatus(500)
+            res.sendStatus(404)
             return
         }else {
             res.json(rows)

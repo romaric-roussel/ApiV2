@@ -26,7 +26,7 @@ userRouterPost.post("/user", (req,res)=>{
                  res.status(202).send({status:"Mail adress already used"})
                  return
             }else{
-                res.sendStatus(500)
+                res.sendStatus(404)
                 return
             } 
         }else {
@@ -58,10 +58,10 @@ userRouterPost.post("/user/forgetPassword", (req,res)=>{
     mail.mailOptions.text = "here your new password : " + password
     connection.getConnection().query(query,[bcrypt.hashSync(password,10),login],(err,rows,field)=>{
         if(err){           
-            res.status(500).send(err.message)
+            res.status(404).send({status:err.message})
             return
         }else {
-            res.status(200).send("User updated")
+            res.status(200).send({status:"User updated"})
         }  
     })
     mail.sendMail(res)
@@ -74,12 +74,12 @@ const loginTest = (login,password,response) =>{
 
     connection.getConnection().query(queryGetMdp,[login],(errMdp,rowsMdp,fieldsMdp)=>{
             if(errMdp){
-                response.status(500).send(errMdp.message)
+                response.status(404).send({status:errMdp.message})
                 return
                
             }else {
                 if(rowsMdp.length < 1){
-                    response.status(500).send("Mail adress unknow")
+                    response.status(404).send({status:"Mail adress unknow"})
                     return
                 }
                 bcrypt.compare( password,rowsMdp[0].mdp, function(err, res) {
@@ -87,14 +87,14 @@ const loginTest = (login,password,response) =>{
                      // Passwords match
                      connection.getConnection().query(queryGetUserId,[login,rowsMdp[0].mdp],(errId,rowsId,fieldsId)=>{
                          if(errId){
-                             response.status(500).send(errId.message)
+                             response.status(404).send({status:errId.message})
                          }else{
-                            response.status(200).send({id:rowsId[0].id_utilisateur,nom:rowsId[0].nom,prenom:rowsId[0].prenom,mail:rowsId[0].mail,photo:rowsId[0].photo})
+                            response.status(200).send({status:"Succes",id:rowsId[0].id_utilisateur,nom:rowsId[0].nom,prenom:rowsId[0].prenom,mail:rowsId[0].mail,photo:rowsId[0].photo})
                          }
                      })
                     } else {
                      // Passwords don't match
-                     response.status(500).send("loggin failed")
+                     response.status(404).send({status:"Loggin or password incorrect"})
                     } 
                   });
             }
