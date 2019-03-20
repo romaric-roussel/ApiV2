@@ -22,7 +22,7 @@ let transporter = nodemailer.createTransport({
 
 const sendMail = (res) => transporter.sendMail(mailOptions, function(error, info){
   if (error) {
-    res.status(500).send(error.message)
+    res.status(404).send(error.message)
   } else {
     res.status(200).send(info.response);
   }

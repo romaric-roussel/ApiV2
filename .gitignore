@@ -4141,6 +4141,14 @@ node_modules/ansi-align/node_modules/strip-ansi/package\.json
 
 node_modules/ansi-align/node_modules/strip-ansi/readme\.md
 
+node_modules/ansi-regex/index\.js
+
+node_modules/ansi-regex/license
+
+node_modules/ansi-regex/package\.json
+
+node_modules/ansi-regex/readme\.md
+
 node_modules/anymatch/node_modules/normalize-path/index\.js
 
 node_modules/anymatch/node_modules/normalize-path/LICENSE
@@ -4175,9 +4183,19 @@ node_modules/are-we-there-yet/tracker-stream\.js
 
 node_modules/are-we-there-yet/tracker\.js
 
+node_modules/async-each/\.npmignore
+
 node_modules/async-each/bower\.json
 
 node_modules/async-each/component\.json
+
+node_modules/async-each/package\.json
+
+node_modules/async-each/README\.md
+
+node_modules/binary-extensions/binary-extensions\.json
+
+node_modules/binary-extensions/package\.json
 
 node_modules/boxen/node_modules/ansi-regex/index\.js
 
@@ -4210,6 +4228,16 @@ node_modules/boxen/node_modules/strip-ansi/license
 node_modules/boxen/node_modules/strip-ansi/package\.json
 
 node_modules/boxen/node_modules/strip-ansi/readme\.md
+
+node_modules/chokidar/CHANGELOG\.md
+
+node_modules/chokidar/index\.js
+
+node_modules/chokidar/lib/nodefs-handler\.js
+
+node_modules/chokidar/package\.json
+
+node_modules/chokidar/README\.md
 
 node_modules/chokidar/types/index\.d\.ts
 
@@ -4361,6 +4389,18 @@ node_modules/inflight/package\.json
 
 node_modules/inflight/README\.md
 
+node_modules/is-fullwidth-code-point/index\.js
+
+node_modules/is-fullwidth-code-point/package\.json
+
+node_modules/is-fullwidth-code-point/readme\.md
+
+node_modules/lodash\.debounce/index\.js
+
+node_modules/lodash\.debounce/package\.json
+
+node_modules/lodash\.debounce/README\.md
+
 node_modules/lru-cache/node_modules/yallist/iterator\.js
 
 node_modules/lru-cache/node_modules/yallist/LICENSE
@@ -4370,6 +4410,24 @@ node_modules/lru-cache/node_modules/yallist/package\.json
 node_modules/lru-cache/node_modules/yallist/README\.md
 
 node_modules/lru-cache/node_modules/yallist/yallist\.js
+
+node_modules/minimist/\.travis\.yml
+
+node_modules/minimist/index\.js
+
+node_modules/minimist/package\.json
+
+node_modules/minimist/readme\.markdown
+
+node_modules/minimist/test/dash\.js
+
+node_modules/minimist/test/default_bool\.js
+
+node_modules/minimist/test/dotted\.js
+
+node_modules/minimist/test/parse_modified\.js
+
+node_modules/minimist/test/parse\.js
 
 node_modules/minipass/index\.js
 
@@ -4434,6 +4492,18 @@ node_modules/mkdirp/test/sync\.js
 node_modules/mkdirp/test/umask_sync\.js
 
 node_modules/mkdirp/test/umask\.js
+
+node_modules/nan/CHANGELOG\.md
+
+node_modules/nan/nan_converters_43_inl\.h
+
+node_modules/nan/nan_implementation_12_inl\.h
+
+node_modules/nan/nan\.h
+
+node_modules/nan/package\.json
+
+node_modules/nan/README\.md
 
 node_modules/needle/bin/needle
 
@@ -4585,11 +4655,35 @@ node_modules/node-pre-gyp/package\.json
 
 node_modules/node-pre-gyp/README\.md
 
+node_modules/nodemon/package\.json
+
+node_modules/nodemon/README\.md
+
+node_modules/nopt/\.npmignore
+
 node_modules/nopt/\.travis\.yml
+
+node_modules/nopt/bin/nopt\.js
 
 node_modules/nopt/CHANGELOG\.md
 
+node_modules/nopt/lib/nopt\.js
+
+node_modules/nopt/LICENSE
+
+node_modules/nopt/package\.json
+
+node_modules/nopt/README\.md
+
 node_modules/nopt/test/basic\.js
+
+node_modules/normalize-path/index\.js
+
+node_modules/normalize-path/LICENSE
+
+node_modules/normalize-path/package\.json
+
+node_modules/normalize-path/README\.md
 
 node_modules/npm-bundled/index\.js
 
@@ -4733,6 +4827,22 @@ node_modules/set-blocking/package\.json
 
 node_modules/set-blocking/README\.md
 
+node_modules/string-width/index\.js
+
+node_modules/string-width/license
+
+node_modules/string-width/package\.json
+
+node_modules/string-width/readme\.md
+
+node_modules/strip-ansi/index\.js
+
+node_modules/strip-ansi/license
+
+node_modules/strip-ansi/package\.json
+
+node_modules/strip-ansi/readme\.md
+
 node_modules/tar/index\.js
 
 node_modules/tar/lib/buffer\.js
@@ -4797,6 +4907,14 @@ node_modules/touch/node_modules/nopt/package\.json
 
 node_modules/touch/node_modules/nopt/README\.md
 
+node_modules/upath/build/code/upath\.js
+
+node_modules/upath/package\.json
+
+node_modules/upath/readme\.md
+
+node_modules/upath/upath\.d\.ts
+
 node_modules/wide-align/align\.js
 
 node_modules/wide-align/LICENSE
@@ -4844,3 +4962,9 @@ node_modules/wrappy/package\.json
 node_modules/wrappy/README\.md
 
 node_modules/wrappy/wrappy\.js
+
+node_modules/yallist/iterator\.js
+
+node_modules/yallist/package\.json
+
+node_modules/yallist/yallist\.js
