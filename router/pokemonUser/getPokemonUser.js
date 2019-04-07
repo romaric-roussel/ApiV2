@@ -15,7 +15,8 @@ const pokemonUserRouterGet = express.Router()
                 formatJson = {status:"true",result:{data:[]}}
                 for(let i = 0;i<rows.length;i++){
                     const onePokemon = await getPokemonById(rows[i].id_pokemon)
-                    let result = {id:"",image:"",name:"",nb_exemplaire:""}
+                    let result = {id_list:"",id:"",image:"",name:"",nb_exemplaire:""}
+                    result.id_list = rows[i].id_liste
                     result.id = onePokemon.data.id
                     result.image = onePokemon.data.sprites.front_default
                     result.name = onePokemon.data.name
@@ -36,7 +37,7 @@ const pokemonUserRouterGet = express.Router()
 
 
 const getAllUserPokemon = async (userId, callBack) => {
-    const query = "select id_pokemon,nb_exemplaire from liste_pokemon where id_utilisateur = ?"
+    const query = "select id_liste,id_pokemon,nb_exemplaire from liste_pokemon where id_utilisateur = ? and nb_exemplaire > 0"
         
     connection.getConnection().query(query,[userId],(err,rows) => {
             if(err){

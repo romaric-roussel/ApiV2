@@ -1,10 +1,10 @@
 const express = require('express')
-const exchangeRouterPost = express.Router()
+const exchangeListRouterPost = express.Router()
 const connection = require("../../connection")
 
 
 
-exchangeRouterPost.post("/exchangeList", (req,res)=>{
+exchangeListRouterPost.post("/exchangeList", (req,res)=>{
     const idUtilisateur = req.body.id_utilisateur;
     const idPokemon1 = req.body.id_pokemon_utilisateur_1;
     const idPokemon2 = req.body.id_pokemon_utilisateur_2;
@@ -23,4 +23,4 @@ exchangeRouterPost.post("/exchangeList", (req,res)=>{
     
 })
 
-module.exports.exchangeRouterPost = exchangeRouterPost
+module.exports.exchangeListRouterPost = exchangeListRouterPost

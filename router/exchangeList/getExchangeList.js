@@ -1,12 +1,12 @@
 const express = require('express')
-const exchangeRouterGet = express.Router()
+const exchangeListRouterGet = express.Router()
 const connection = require("../../connection")
 const axios = require('axios')
 
 
 
 
-exchangeRouterGet.get("/exchangeList/user/:id", async (req,res)=>{
+exchangeListRouterGet.get("/exchangeList/user/:id", async (req,res)=>{
     let formatJson
       try{
               await getAllExchangeListUser(req.params.id,async(err,rows) => {
@@ -66,4 +66,4 @@ const getPokemonById = async (id) => {
 
 
 
-module.exports.exchangeRouterGet = exchangeRouterGet
+module.exports.exchangeListRouterGet = exchangeListRouterGet
