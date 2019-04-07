@@ -16,7 +16,7 @@ exchangeRouterPut.put("/exchangeList", (req,res)=>{
             res.sendStatus(404)
             return 
         }else {
-            res.status(201).send({status:"Succes",code:201})
+            res.status(200).send({status:"Succes",code:200})
         }
         
     })
