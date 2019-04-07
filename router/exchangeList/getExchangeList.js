@@ -19,9 +19,10 @@ exchangeRouterGet.get("/exchangeList/user/:id", async (req,res)=>{
                  for(let i = 0;i<rows.length;i++){
                      const pokemonUser1 = await getPokemonById(rows[i].id_pokemon_utilisateur_1)
                      const pokemonUser2 = await getPokemonById(rows[i].id_pokemon_utilisateur_2)
-                     let result = {id_pokemon_utilisateur_1:"",image_pokemon_utilisateur_1:"",name_pokemon_utilisateur_1:"",
+                     let result = {id_list:"",id_pokemon_utilisateur_1:"",image_pokemon_utilisateur_1:"",name_pokemon_utilisateur_1:"",
                      id_pokemon_utilisateur_2:"",image_pokemon_utilisateur_2:"",name_pokemon_utilisateur_2:""}
 
+                     result.id_list = rows[i].id
                      result.id_pokemon_utilisateur_1 = pokemonUser1.data.id
                      result.image_pokemon_utilisateur_1 = pokemonUser1.data.sprites.front_default
                      result.name_pokemon_utilisateur_1 = pokemonUser1.data.name
