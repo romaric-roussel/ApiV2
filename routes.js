@@ -5,6 +5,7 @@ const friendsPost = require('./router/friends/postFriends')
 const userGet = require('./router/users/getUsers')
 const userPost = require('./router/users/postUsers')
 const pokemonUserGet = require('./router/pokemonUser/getPokemonUser')
+const exchangeGet = require('./router/exchangeList/getExchangeList')
 
 
 
@@ -15,7 +16,8 @@ const router = [pokemonGet.pokemonRouterGet
                 userPost.userRouterPost,
                 pokemonUserGet.pokemonUserRouterGet,
                 friendsGet.friendsRouterGet,
-                friendsPost.friendsRouterPost]
+                friendsPost.friendsRouterPost,
+            exchangeGet.exchangeRouterGet]
 
 
 module.exports.router = router
