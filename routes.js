@@ -8,6 +8,7 @@ const pokemonUserGet = require('./router/pokemonUser/getPokemonUser')
 const exchangeListGet = require('./router/exchangeList/getExchangeList')
 const exchangeListPost = require('./router/exchangeList/postExchangeList')
 const exchangePost = require('./router/exchange/postExchange')
+const exchangePut = require('./router/exchangeList/putExchangeList')
 
 
 
@@ -24,6 +25,7 @@ const router = [pokemonGet.pokemonRouterGet
             exchangeListGet.exchangeListRouterGet,
         exchangeListPost.exchangeListRouterPost,
     exchangePost.exchangeRouterPost]
+    exchangePut.exchangeRouterPut]
 
 
 module.exports.router = router
