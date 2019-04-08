@@ -28,6 +28,7 @@ const router = [pokemonGet.pokemonRouterGet
         exchangeListPost.exchangeListRouterPost,
     exchangePost.exchangeRouterPost,
     exchangePut.exchangeRouterPut]
+                friendsDelete.friendsRouterDelete,
 
 
 module.exports.router = router
