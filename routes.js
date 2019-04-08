@@ -24,7 +24,7 @@ const router = [pokemonGet.pokemonRouterGet
                 friendsPost.friendsRouterPost,
             exchangeListGet.exchangeListRouterGet,
         exchangeListPost.exchangeListRouterPost,
-    exchangePost.exchangeRouterPost]
+    exchangePost.exchangeRouterPost,
     exchangePut.exchangeRouterPut]
 
 
