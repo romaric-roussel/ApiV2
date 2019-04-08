@@ -8,9 +8,9 @@ pokemonRouterGet.get("/pokemon", async (req,res)=>{
     let formatJson
       try {
           const allPokemon =  await getAllPokemon()
-          formatJson = {status:"true",count:allPokemon.data.count,result:{data:allPokemon.data.results}}
+          formatJson = {status:"true",count:"150",result:{data:allPokemon.data.results}}
           console.log(formatJson.result.data)
-          for(let i = 0;i<20;i++){
+          for(let i = 0;i<150;i++){
               const onePokemon = await getIdPokemonAndImageFromName(allPokemon.data.results[i].name)
               console.log(onePokemon.data.id + "kgek")
               formatJson.result.data[i].id = onePokemon.data.id
@@ -53,7 +53,7 @@ pokemonRouterGet.get("/pokemon/:id", async (req,res)=>{
 const getAllPokemon = async () => {
     
     try {
-        return await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20')
+        return await axios.get('https://pokeapi.co/api/v2/pokemon?limit=150')
       } catch (error) {
         console.error(error)
       }
