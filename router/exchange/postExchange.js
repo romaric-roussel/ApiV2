@@ -44,7 +44,7 @@ exchangeRouterPost.post("/exchange", async (req,res)=>{
                             console.log("test")
                             
                             
-                        connection.getConnection.beginTransaction(async(err)=>{
+                        /*connection.getConnection.beginTransaction(async(err)=>{
                             if(err){
                                 res.sendStatus(404)
                                 return 
@@ -56,7 +56,7 @@ exchangeRouterPost.post("/exchange", async (req,res)=>{
                                     res.sendStatus(404)
                                     return
                                 })
-                            }
+                            }*/
                                 
                                 /*connection.getConnection.query(updateUserSendQuery,[id_list_user_send_remove],(err,rows,field)=>{
                                 if(err){
@@ -108,8 +108,8 @@ exchangeRouterPost.post("/exchange", async (req,res)=>{
                             })*/
                                 
                                 
-                            
-                        });
+                        
+                        //});
                         
                     }
                     
@@ -166,7 +166,7 @@ const getIdList = async (userId,idPokemon) => {
     return promise
 }
 
-const getPromise1 = async(updateUserSendQuery,id_list_user_send_remove) => {
+/*const getPromise1 = async(updateUserSendQuery,id_list_user_send_remove) => {
     const promise1 = new Promise((resolve,reject)=>{
         //const updateUserSendQuery = "update liste_pokemon set nb_exemplaire = nb_exemplaire - 1 where id_liste = ?"
         connection.getConnection.query(updateUserSendQuery,[id_list_user_send_remove],(err,rows,field)=>{
@@ -183,7 +183,7 @@ const getPromise1 = async(updateUserSendQuery,id_list_user_send_remove) => {
         
     });
     return promise1
-} 
+} */
 
 /*const promise2= new Promise((resolve,reject)=>{
     connection.getConnection.query(updateUserSendQuery,[id_list_user_receive_remove],(err,rows,field)=>{
@@ -221,6 +221,51 @@ const promise4 = new Promise((resolve,reject)=>{
         resolve("")
     });
 });*/
+
+function inTransaction(pool, body, callback) {
+    withConnection(pool, function(db, done) {
+
+        db.beginTransaction(function(err) {
+            if (err) return done(err);
+
+            body(db, finished)
+        })
+
+        // Commit or rollback transaction, then proxy callback
+        function finished(err) {
+            var context = this;
+            var args = arguments;
+
+            if (err) {
+                if (err == 'rollback') {
+                    args[0] = err = null;
+                }
+                db.rollback(function() { done.apply(context, args) });
+            } else {
+                db.commit(function(err) {
+                    args[0] = err;
+                    done.apply(context, args)
+                })
+            }
+        }
+    }, callback)
+}
+
+/**
+ * Convenience wrapper for database connection from pool
+ */
+function withConnection(pool, body, callback) {
+    pool.getConnection(function(err, db) {
+        if (err) return callback(err);
+
+        body(db, finished);
+
+        function finished() {
+            db.release();
+            callback.apply(this, arguments);
+        }
+    })
+}
     
     
   
