@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-
+//var util = require("util");
 
 /*const pool = mysql.createPool({
     connectionLimit:10,
@@ -8,7 +8,7 @@ const mysql = require('mysql')
     password:"",
     database: 'api'
   })*/
-
+  //pool.query = util.promisify(pool.query);
 
   const pool = mysql.createPool({
     connectionLimit:10,
