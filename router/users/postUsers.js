@@ -11,7 +11,7 @@ const generator = require('generate-password');
 
 
 
-userRouterPost.post("/user", (req,res)=>{
+userRouterPost.post("/user",  (req,res)=>{
     const nom = req.body.nom;
     const prenom = req.body.prenom;
     const mail = req.body.email;
@@ -20,7 +20,7 @@ userRouterPost.post("/user", (req,res)=>{
     const password = req.body.password;
     const query = "INSERT INTO utilisateur(nom,prenom,mail, mdp,type_connexion,photo) VALUES(?,?,?,?,?,?) "
     let hashPassword = bcrypt.hashSync(password, 10)
-    connection.getConnection().query(query,[nom,prenom,mail,hashPassword,type_connexion,photo],(err,rows,field)=>{
+    connection.getConnection().query(query,[nom,prenom,mail,hashPassword,type_connexion,photo],async(err,rows,field)=>{
         if(err){
             if(err.code =="ER_DUP_ENTRY"){
                  res.status(404).send({status:"Mail adress already used",code:404})
@@ -30,6 +30,7 @@ userRouterPost.post("/user", (req,res)=>{
                 return
             } 
         }else {
+            await putUserPokemonDefaultValue(rows.insertId)
             res.status(201).send({status:"Account created",code:201})
         }
         
@@ -89,6 +90,7 @@ const loginTest = (login,password,response) =>{
                          if(errId){
                              response.status(404).send({status:errId.message,code:404})
                          }else{
+                             //check 1ere co
                             response.status(200).send({status:"Succes",code:200,id:rowsId[0].id_utilisateur,nom:rowsId[0].nom,prenom:rowsId[0].prenom,mail:rowsId[0].mail,photo:rowsId[0].photo})
                          }
                      })
@@ -101,10 +103,25 @@ const loginTest = (login,password,response) =>{
     })
    
     
-    
+
    
     
 }
+
+const putUserPokemonDefaultValue = async (userId) => {
+    const promise = await new Promise((resolve,reject)=>{
+         const query = "CALL defaultValueNbExemplaire(?)"
+         connection.getConnection().query(query,[userId],(err,rows) => {
+             if(err){
+                 reject(err)
+             }else{
+                  resolve()
+             }
+             
+         });
+     })
+     return promise
+ }
 
 
 module.exports.userRouterPost = userRouterPost
