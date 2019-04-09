@@ -12,6 +12,7 @@ const mysql = require('mysql')
 
   const pool = mysql.createPool({
     connectionLimit:10,
+    timeout : 60 * 60 * 10000,
     host: 'db4free.net',
     user: 'romaric',
     password:"azeqsdwxc",
