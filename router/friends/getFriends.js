@@ -12,7 +12,7 @@ friendsRouterGet.get("/user/:id/friends", (req,res)=>{
             return
         }else {
             formatJson.result.data = rows
-            res.send(formatJson).statusCode(200)
+            res.send(formatJson).status(200)
         }
     })
     
