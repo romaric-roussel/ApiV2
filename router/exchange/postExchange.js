@@ -39,78 +39,77 @@ exchangeRouterPost.post("/exchange", async (req,res)=>{
                     //console.log(rows_user_receive_pokemon_receive)
                     
                     if(rows_user_receive_pokemon_receive.length > 0){
-                       /*const test = await transaction([updateUserSendQuery,updateUserSendQuery,updateUserReceiveQuery,updateUserReceiveQuery],
-                            [[id_list_user_send_remove],[id_list_user_receive_remove],[id_list_user_send_add],[id_list_user_receive_add]])*/
-                            console.log("test")
-                            
-                            
-                        /*connection.getConnection.beginTransaction(async(err)=>{
+         
+                        connection.getConnection().getConnection(function(err, connection) {
+                        connection.beginTransaction(async(err)=>{
                             if(err){
-                                res.sendStatus(404)
-                                return 
-                            }
-                            try {
-                                await getPromise1(updateUserSendQuery,id_list_user_send_remove)
-                            }catch(error){
-                                connection.getConnection.rollback(()=>{
+                                console.log(err)
+                                connection.rollback(function() {
+                                    connection.release();
+                                    //Failure
                                     res.sendStatus(404)
-                                    return
-                                })
-                            }*/
-                                
-                                /*connection.getConnection.query(updateUserSendQuery,[id_list_user_send_remove],(err,rows,field)=>{
-                                if(err){
-                                    connection.getConnection.rollback(()=>{
-                                        res.sendStatus(404)
-                                        return
-                                    })
-                                }
-                            });
-                            connection.getConnection.query(updateUserSendQuery,[id_list_user_receive_remove],(err,rows,field)=>{
-                                if(err){
-                                    connection.getConnection.rollback(()=>{
-                                        res.sendStatus(404)
-                                        return
-                                    })
-                                }
-                            });
-                            connection.getConnection.query(updateUserReceiveQuery,[id_list_user_send_add],(err,rows,field)=>{
-                                if(err){
-                                    connection.getConnection.rollback(()=>{
-                                        res.sendStatus(404)
-                                        return
-                                    })
-                                }
-                            });
-                            connection.getConnection.query(updateUserReceiveQuery,[id_list_user_receive_add],(err,rows,field)=>{
-                                if(err){
-                                    connection.getConnection.rollback(()=>{
-                                        res.sendStatus(404)
-                                        return
-                                    })
-                                }
-                            });*/
-                           /* const promise5 = new Promise((resolve,reject)=>{
-                                connection.getConnection.commit(function(err) {
-                                    if (err) { 
-                                      connection.rollback(function() {
-                                        throw err;
-                                      });
-                                      reject(err)
+                                return 
+                                });                                                       
+                            }else {
+                                connection.query(updateUserSendQuery,[id_list_user_send_remove],(err,rows,field)=>{
+                                    if(err){
+                                        console.log(err)
+                                        connection.rollback(()=>{
+                                            connection.release()
+                                            res.sendStatus(404)
+                                            return
+                                        })
+                                    } else {
+                                        connection.query(updateUserSendQuery,[id_list_user_receive_remove],(err,rows,field)=>{
+                                            if(err){
+                                                connection.rollback(()=>{
+                                                    connection.release()
+                                                    res.sendStatus(404)
+                                                    return
+                                                })
+                                            } else {
+                                                connection.query(updateUserReceiveQuery,[id_list_user_send_add],(err,rows,field)=>{
+                                                    if(err){
+                                                        connection.rollback(()=>{
+                                                            connection.release()
+                                                            res.sendStatus(404)
+                                                            return
+                                                        })
+                                                    } else {
+                                                        connection.query(updateUserReceiveQuery,[id_list_user_receive_add],(err,rows,field)=>{
+                                                            if(err){
+                                                                connection.rollback(()=>{
+                                                                    connection.release()
+                                                                    
+                                                                    res.sendStatus(404)
+                                                                    return
+                                                                })
+                                                            } else {
+                                                                connection.commit(function(err) {
+                                                                    if (err) {
+                                                                        connection.rollback(function() {
+                                                                            connection.release();
+                                                                            //Failure
+                                                                        });
+                                                                    } else {
+                                                                        connection.release();
+                                                                       
+                                                                        res.status(200).send({status:"Succes",code:200})
+                                                                        //Success
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
                                     }
-                                    resolve()
-                            })
-                        })*/
-
-                            /*promise1.then(promise2).then(promise3).then(promise4).then(promise5).then(()=>{
-                                //res.status(201).send({status:"Succes",code:200})
-                                connection.getConnection.end();
-                            })*/
+                                });
+                            }
                                 
-                                
-                        
-                        //});
-                        
+                        })
+                        })
                     }
                     
                 }
@@ -140,17 +139,7 @@ const getNbExemplaire = async (userId,idPokemon) => {
     return promise
 }
 
-/*const getIdList = async (userId,idPokemon,callBack2) => {
-    const query = "select id_liste from liste_pokemon where id_utilisateur = ? and id_pokemon = ?"
-        
-    connection.getConnection().query(query,[userId,idPokemon],(err,rows) => {
-            if(err){
-                callBack2(err,null)
-            }else {
-                callBack2(null,rows)
-            }
-        });
-}*/
+
 
 const getIdList = async (userId,idPokemon) => {
    const promise = await new Promise((resolve,reject)=>{
@@ -158,115 +147,20 @@ const getIdList = async (userId,idPokemon) => {
         connection.getConnection().query(query,[userId,idPokemon],(err,rows) => {
             if(err){
                 reject(err)
-            }else {
-                resolve(rows[0].id_liste)
+            }else if (rows.length < 1){
+                reject(404)
+            }else{
+                 resolve(rows[0].id_liste)
             }
+            
         });
     })
     return promise
 }
 
-/*const getPromise1 = async(updateUserSendQuery,id_list_user_send_remove) => {
-    const promise1 = new Promise((resolve,reject)=>{
-        //const updateUserSendQuery = "update liste_pokemon set nb_exemplaire = nb_exemplaire - 1 where id_liste = ?"
-        connection.getConnection.query(updateUserSendQuery,[id_list_user_send_remove],(err,rows,field)=>{
-            if(err){
-                connection.getConnection.rollback(()=>{
-                    res.sendStatus(404)
-                    reject(err)
-                    return
-                })
-            }
-            resolve("")
-            
-        });
-        
-    });
-    return promise1
-} */
 
-/*const promise2= new Promise((resolve,reject)=>{
-    connection.getConnection.query(updateUserSendQuery,[id_list_user_receive_remove],(err,rows,field)=>{
-        if(err){
-            connection.getConnection.rollback(()=>{
-                res.sendStatus(404)
-                reject(err)
-                return
-            })
-        }
-        resolve("")
-    });
-});
-const promise3= new Promise((resolve,reject)=>{
-    connection.getConnection.query(updateUserReceiveQuery,[id_list_user_send_add],(err,rows,field)=>{
-        if(err){
-            connection.getConnection.rollback(()=>{
-                res.sendStatus(404)
-                reject(err)
-                return
-            })
-        }
-        resolve("")
-    });
-});
-const promise4 = new Promise((resolve,reject)=>{
-    connection.getConnection.query(updateUserReceiveQuery,[id_list_user_receive_add],(err,rows,field)=>{
-        if(err){
-            connection.getConnection.rollback(()=>{
-                res.sendStatus(404)
-                reject(err)
-                return
-            })
-        }
-        resolve("")
-    });
-});*/
 
-function inTransaction(pool, body, callback) {
-    withConnection(pool, function(db, done) {
-
-        db.beginTransaction(function(err) {
-            if (err) return done(err);
-
-            body(db, finished)
-        })
-
-        // Commit or rollback transaction, then proxy callback
-        function finished(err) {
-            var context = this;
-            var args = arguments;
-
-            if (err) {
-                if (err == 'rollback') {
-                    args[0] = err = null;
-                }
-                db.rollback(function() { done.apply(context, args) });
-            } else {
-                db.commit(function(err) {
-                    args[0] = err;
-                    done.apply(context, args)
-                })
-            }
-        }
-    }, callback)
-}
-
-/**
- * Convenience wrapper for database connection from pool
- */
-function withConnection(pool, body, callback) {
-    pool.getConnection(function(err, db) {
-        if (err) return callback(err);
-
-        body(db, finished);
-
-        function finished() {
-            db.release();
-            callback.apply(this, arguments);
-        }
-    })
-}
-    
+ 
     
   
    
