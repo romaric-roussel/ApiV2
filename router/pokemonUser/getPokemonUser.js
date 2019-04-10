@@ -21,7 +21,7 @@ const pokemonUserRouterGet = express.Router()
                     }
                     let result = {id_list:"",nom_type_1:"",nom_type_2:"",id:"",image:"",name:"",nb_exemplaire:""}
                     result.id_list = rows[i].id_liste
-                    result.nom_type_1 = onePokemon.data.types[0].type.name,
+                    result.nom_type_1 = onePokemon.data.types[0].type.name
                     result.nom_type_2 = nom_type_2
                     result.id = onePokemon.data.id
                     result.image = onePokemon.data.sprites.front_default
