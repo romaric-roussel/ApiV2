@@ -17,16 +17,17 @@ const pokemonUserRouterGet = express.Router()
                     const onePokemon = await getPokemonById(rows[i].id_pokemon)
                     let nom_type_2 = ""
                     if(onePokemon.data.types[1] != null){
-                        nom_type_2 = pokemon.data.types[1].type.name
+                        nom_type_2 = onePokemon.data.types[1].type.name
                     }
-                    let result = {id_list:"",nom_type_1:"",nom_type_2:"",id:"",image:"",name:"",nb_exemplaire:""}
+        
+                    let result = {id_list:"",id:"",image:"",name:"",nb_exemplaire:"",nom_type_1:"",nom_type_2:""}
                     result.id_list = rows[i].id_liste
-                    result.nom_type_1 = onePokemon.data.types[0].type.name
-                    result.nom_type_2 = nom_type_2
                     result.id = onePokemon.data.id
                     result.image = onePokemon.data.sprites.front_default
                     result.name = onePokemon.data.name
                     result.nb_exemplaire = rows[i].nb_exemplaire
+                    result.nom_type_1 = onePokemon.data.types[0].type.name
+                    result.nom_type_2 = nom_type_2
                     formatJson.result.data[i] = result
                 }
                 res.json(formatJson)
