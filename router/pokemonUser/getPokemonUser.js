@@ -12,7 +12,7 @@ const pokemonUserRouterGet = express.Router()
                  res.sendStatus(500)
                  return
                  }else if(rows.length < 1){
-                    res.sendStatus(500)
+                    res.sendStatus(404)
                     return
                  
              }else {
