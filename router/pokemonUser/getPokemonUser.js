@@ -11,6 +11,10 @@ const pokemonUserRouterGet = express.Router()
                  if(err){
                  res.sendStatus(500)
                  return
+                 }else if(rows.length < 1){
+                    res.sendStatus(500)
+                    return
+                 
              }else {
                 formatJson = {status:"true",result:{data:[]}}
                 for(let i = 0;i<rows.length;i++){
