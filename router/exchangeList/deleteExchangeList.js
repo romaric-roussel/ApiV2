@@ -11,6 +11,9 @@ exchangeRouterDelete.delete("/exchangeList/:id", (req,res)=>{
         if(err){     
             res.sendStatus(404)
             return 
+        }else if(rows.affectedRows == 0){
+            res.sendStatus(404)
+            return
         }else {
             res.status(200).send({status:"Succes",code:200})
         }

@@ -10,6 +10,9 @@ friendsRouterGet.get("/user/:id/friends", (req,res)=>{
         if(err){
             res.sendStatus(404)
             return
+        }else if(rows.length < 1){
+            res.sendStatus(404)
+            return
         }else {
             formatJson.result.data = rows
             res.send(formatJson).status(200)

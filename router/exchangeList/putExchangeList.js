@@ -15,7 +15,7 @@ exchangeRouterPut.put("/exchangeList", (req,res)=>{
         if(err){     
             res.sendStatus(404)
             return 
-        }else if(rows.length < 1){
+        }else if(rows.affectedRows == 0){
             res.sendStatus(404)
             return 
         

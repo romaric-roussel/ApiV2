@@ -80,7 +80,7 @@ const loginTest = (login,password,response) =>{
                
             }else {
                 if(rowsMdp.length < 1){
-                    response.status(200).send({status:"Mail adress unknow",code:404})
+                    response.status(400).send({status:"Mail adress unknow",code:404})
                     return
                 }
                 bcrypt.compare( password,rowsMdp[0].mdp, function(err, res) {
@@ -103,7 +103,7 @@ const loginTest = (login,password,response) =>{
                      })
                     } else {
                      // Passwords don't match
-                     response.status(200).send({status:"Loggin or password incorrect",code:404})
+                     response.status(404).send({status:"Loggin or password incorrect",code:404})
                     } 
                   });
             }

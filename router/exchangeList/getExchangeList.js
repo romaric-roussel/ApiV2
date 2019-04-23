@@ -14,6 +14,9 @@ exchangeListRouterGet.get("/exchangeList/user/:id", async (req,res)=>{
                   if(err){
                   res.sendStatus(500)
                   return
+                  }else if(rows.length < 1){
+                    res.sendStatus(404)
+                    return
               }else {
                  formatJson = {status:"true",result:{data:[]}}
                  for(let i = 0;i<rows.length;i++){
